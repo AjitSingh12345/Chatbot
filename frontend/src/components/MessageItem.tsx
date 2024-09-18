@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Message } from '../services/api';
-import { FaEdit, FaTrash, FaSave, FaTimes, FaRobot } from 'react-icons/fa';  // Import FaRobot along with others
+import { FaEdit, FaTrash, FaSave, FaTimes } from 'react-icons/fa';  // Import FaRobot along with others
+import '../styles/MessageItem.css';
 
 /*
 Represents individual message in chat interface
@@ -51,49 +52,53 @@ const MessageItem: React.FC<Props> = ({ message, onEdit, onDelete }) => {
     */
     return (
         <div>
-            {/* User message - aligned to right */}
-            <div className="flex justify-end mb-4">
-                <div className="p-4 rounded-lg bg-purple-500 text-white max-w-xs text-lg">
+            {/* user Message - aligned to the right */}
+            <div className="flex justify-end mb-4 items-center">
+                <div className="p-4 bg-purple-500 text-white rounded-lg max-w-xs break-words text-lg">
                     {isEditing ? (
-                        <div className="flex items-center space-x-2">
-                            <input
-                                value={editText}
-                                onChange={(e) => setEditText(e.target.value)}
-                                className="border p-2 rounded-md bg-gray-100 text-black text-lg"
-                            />
-                            
-                            <button onClick={handleSave} className="text-green-500 hover:text-green-700 text-xl">
-                                <FaSave /> {/* Save icon */}
-                            </button>
-
-                            <button onClick={handleCancel} className="text-red-500 hover:text-red-700 text-xl">
-                                <FaTimes /> {/* Cancel icon */}
-                            </button>
-                        </div>
+                    <div className="flex items-center space-x-2">
+                        <input
+                            value={editText}
+                            onChange={(e) => setEditText(e.target.value)}
+                            className="border p-2 rounded-md bg-gray-100 text-black text-lg"
+                        />
+                    </div>
                     ) : (
-                        <>
-                            <p>{message.user_message}</p>
-                            <div className="flex space-x-4 mt-2">
-                                <button onClick={() => setIsEditing(true)} className="text-blue-500 hover:text-blue-700 text-xl">
-                                    <FaEdit /> {/* Edit icon */}
-                                </button>
-                                
-                                <button onClick={() => onDelete(message.id)} className="text-red-500 hover:text-red-700 text-xl">
-                                    <FaTrash /> {/* Delete icon */}
-                                </button>
-                            </div>
-                        </>
+                    <>
+                        <p className="text-xl">{message.user_message}</p>
+                    </>
                     )}
                 </div>
             </div>
-        
-            {/* Bot response - aligned to the left */}
-            <div className="flex justify-start mb-4">
-                <div className="p-4 rounded-lg bg-gray-100 text-black max-w-xs text-lg">
-                    <div className="flex items-start">
-                        <FaRobot className="w-8 h-8 text-purple-500 mr-2" />
-                        <p>{message.bot_response}</p>
-                    </div>
+
+            {/* edit/delete or save/cancel buttons - positioned below message with a white background */}
+            <div className="flex justify-end space-x-4 mt-1 bg-white p-2 rounded-lg">
+                {isEditing ? (
+                    <>
+                        <button onClick={handleSave} className="text-green-500 hover:text-green-700 text-xl">
+                            <FaSave />
+                        </button>
+                        <button onClick={handleCancel} className="text-red-500 hover:text-red-700 text-xl">
+                            <FaTimes />
+                        </button>
+                    </>
+                ) : (
+                    <>
+                        <button onClick={() => setIsEditing(true)} className="text-blue-500 hover:text-blue-700 text-xl">
+                            <FaEdit />
+                        </button>
+                        <button onClick={() => onDelete(message.id)} className="text-red-500 hover:text-red-700 text-xl">
+                            <FaTrash />
+                        </button>
+                    </>
+                )}
+            </div>
+
+            {/* bot response - aligned to the left */}
+            <div className="flex justify-start mb-4 items-center">
+                <img src="/images/Avatar_UI.jpg" className="w-12 h-12 rounded-full" alt="Avatar" />
+                <div className="p-4 bg-gray-100 text-black rounded-lg max-w-xs break-words text-lg">
+                    <p className="text-xl">{message.bot_response}</p>
                 </div>
             </div>
         </div>

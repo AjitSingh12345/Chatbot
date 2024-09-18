@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FaPaperPlane } from 'react-icons/fa'; 
+
 
 /*
 Defines InputBar compoent where users can type and send messages
@@ -36,8 +38,8 @@ const InputBar: React.FC<Props> = ({ onSend }) => {
                 placeholder="Your question..."
                 className="flex-grow p-3 border rounded-lg text-lg"
             />
-            <button onClick={handleSubmit} className="bg-purple-500 text-white p-3 rounded-lg text-lg hover:bg-purple-600">
-            ✈️
+            <button onClick={handleSubmit} className="text-black p-3 rounded-lg text-lg hover:bg-gray-100">
+                <FaPaperPlane /> 
             </button>
         </div>
     );

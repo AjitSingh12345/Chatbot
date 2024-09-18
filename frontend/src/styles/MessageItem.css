@@ -1,0 +1,14 @@
+.bot-message {
+    background-color: white;
+    color: black;
+    border-radius: 16px;
+    padding: 12px;
+    margin-left: 8px;
+    border: 1px solid #e6e6e6;
+    max-width: 75%;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    display: inline-block;
+    text-align: left;
+}
