@@ -1,9 +1,12 @@
 from sqlalchemy import Column, Integer, String
-from database import Base   # base class all models inherit from
+from sqlalchemy.ext.declarative import declarative_base
 
-'''
+"""
 Defines database schema for the chatbot application
-'''
+All database tables inherit from Base
+"""
+
+Base = declarative_base()   # SQLAlchemy function creates base class for ORM models
 
 class Message(Base):    
     __tablename__ = "messages"  # name of table in database
