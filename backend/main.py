@@ -26,7 +26,7 @@ app.add_middleware(
 )
 
 # creates all tables in database defined by ORM models (classes that inherit from Base)
-Base.metadata.create_all(bind=engine)   # create database
+Base.metadata.create_all(bind=engine)   # recreates tables with updated schema
 
 # chatbot logic (currently simple echo bot)
 def get_bot_response(user_message: str) -> str:

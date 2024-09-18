@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchMessages, sendMessage, editMessage, deleteMessage, Message } from '../services/api';
+import MessageList from './MessageList';
+import InputBar from './InputBar';
 
 /*
 Interface for interacting with chatbot 
@@ -44,9 +46,21 @@ const ChatWidget: React.FC = () => {
         setMessages(messages.filter(msg => msg.id !== id));
     };
 
+    /*
+    - if in loading state, display loading msg else render MessageList component
+    - MessageList component takes in edit and delete handlers
+    - display InputBar at bottom (where users type) which takes a send handler prop
+    - changes to local state are immediately reflected in UI
+    */
     return (
         <div className="chat-widget">
             <h2>Chatbot</h2>
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
+                <MessageList messages={messages} onEdit={handleEdit} onDelete={handleDelete} />
+            )}
+            <InputBar onSend={handleSend} />
         </div>
     );
 };
