@@ -17,12 +17,10 @@ const InputBar: React.FC<Props> = ({ onSend }) => {
     const [text, setText] = useState<string>('');
 
     /*
-    - prevent default form submission behavior 
-    - if text isnt empty, call onSend (from parent component)
+    if text isnt empty, call onSend (from parent component)
       & clear input field by updating state to empty 
      */
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = () => {
         if (text.trim()) {
             onSend(text);
             setText('');
@@ -30,15 +28,18 @@ const InputBar: React.FC<Props> = ({ onSend }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="input-bar">
+        <div className="p-4 flex items-center space-x-4 border-t border-gray-200">
             <input
                 type="text"
                 value={text}
-                onChange={e => setText(e.target.value)}
-                placeholder="Type your message..."
+                onChange={(e) => setText(e.target.value)}
+                placeholder="Your question..."
+                className="flex-grow p-3 border rounded-lg text-lg"
             />
-            <button type="submit">Send</button>
-        </form>
+            <button onClick={handleSubmit} className="bg-purple-500 text-white p-3 rounded-lg text-lg hover:bg-purple-600">
+            ✈️
+            </button>
+        </div>
     );
 };
 

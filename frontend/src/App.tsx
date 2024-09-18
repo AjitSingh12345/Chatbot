@@ -8,12 +8,11 @@ Entry point of application
 
 - App is a container for chat widget component
 - renders chat widget on page
-- App.css file styles layout
 */
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
+    <div className="flex justify-center mt-10">
       <ChatWidget />
     </div>
   );

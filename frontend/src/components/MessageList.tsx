@@ -26,7 +26,7 @@ Renders list of messages using map function to render MessageItem component for 
 
 const MessageList: React.FC<Props> = ({ messages, onEdit, onDelete }) => {
   return (
-    <div className="message-list">
+    <div className="p-4 flex flex-col space-y-4">
       {messages.map(msg => (
         <MessageItem key={msg.id} message={msg} onEdit={onEdit} onDelete={onDelete} />
       ))}
