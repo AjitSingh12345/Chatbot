@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy.orm import declarative_base
+import datetime
 
 """
 Defines database schema for the chatbot application
@@ -14,3 +15,4 @@ class Message(Base):
     id = Column(Integer, primary_key=True, index=True)  # unique ID for each message
     user_message = Column(String, index=True)           # message sent by the user
     bot_response = Column(String)                       # chatbot's response
+    timestamp = Column(DateTime, default=datetime.datetime.utcnow)  # time message was sent

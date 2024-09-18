@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 import datetime
 
 # Pydantic database schemes
@@ -15,5 +15,4 @@ class MessageResponse(BaseModel):
     timestamp: datetime.datetime
 
     # allows automatic conversion btwn db_message and Pydantic models
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
