@@ -37,7 +37,7 @@ cd chatbot-widget
 
 ### 2. Set up the backend
 
-#### 1. Naviage to backend
+#### 1. Navigate to backend
 ```bash
 cd backend
 ```
@@ -68,7 +68,7 @@ Backend will be available at http://127.0.0.1:8000
 
 ### 3. Set up the frontend
 
-#### 1. Naviage to frontend
+#### 1. Navigate to frontend
 ```bash
 cd frontend
 ```
