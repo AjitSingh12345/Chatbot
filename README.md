@@ -97,3 +97,8 @@ pytest test_main.py
 ```
 
 ## Demo
+
+
+https://github.com/user-attachments/assets/31f9df95-e92d-4350-a250-80047c12c2fd
+
+
