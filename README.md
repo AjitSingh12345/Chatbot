@@ -1,6 +1,6 @@
 # Chatbot Project
 
-Welcome to the Chatbot widget project! This is a full-stack web application that implements a chatbot feature, where users can send, edit, and delete messages. The chatbot provides responses to each user message.
+Welcome to my Chatbot project! This is a full-stack web app that implements a chatbot where users can send, edit, and delete messages. The chatbot provides responses to each user message.
 
 ## Features
 
