@@ -37,59 +37,57 @@ cd chatbot-widget
 
 ### 2. Set up the backend
 
-## 1. Naviage to backend
+#### 1. Naviage to backend
 ```bash
 cd backend
 ```
 
-## 2. Create virtual environment & activate it
+#### 2. Create virtual environment & activate it
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-## 3. Install backend dependencies
+#### 3. Install backend dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-
-## 4. Run FastAPI backend server
+#### 4. Run FastAPI backend server
 
 ```bash
 uvicorn main:app --reload
 ```
 
-## Note
+#### Note
 
 Backend will be available at http://127.0.0.1:8000
 
 
 ### 3. Set up the frontend
 
-## 1. Naviage to frontend
+#### 1. Naviage to frontend
 ```bash
 cd frontend
 ```
 
-## 2. Install frontend dependencies
+#### 2. Install frontend dependencies
 
 ```bash
 npm install
 ```
 
-## 3. Run react development server
+#### 3. Run react development server
 
 ```bash
 npm start
 ```
 
-## Note
+#### Note
 
 Frontend will be available at http://127.0.0.1:3000
-
 
 
 ### 4. Run backend unit tests
@@ -97,3 +95,5 @@ Frontend will be available at http://127.0.0.1:3000
 ```bash
 pytest test_main.py
 ```
+
+## Demo
