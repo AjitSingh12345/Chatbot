@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { fetchMessages, sendMessage, editMessage, deleteMessage, Message } from '../services/api';
 import MessageList from './MessageList';
 import InputBar from './InputBar';
@@ -12,6 +12,16 @@ const ChatWidget: React.FC = () => {
     // save current list of messages (conversation) in components local state
     const [messages, setMessages] = useState<Message[]>([]);
     
+    // useRef for scrolling to the bottom
+    const messageEndRef = useRef<HTMLDivElement>(null);
+
+    // function to scroll to the bottom of the message list
+    const scrollToBottom = () => {
+        if (messageEndRef.current) {
+            messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     // useEffect to fetch data everytime component loads
     // fetch messages from backend & update local state
     useEffect(() => {
@@ -26,6 +36,11 @@ const ChatWidget: React.FC = () => {
 
         loadMessages();
     }, []);    
+
+    // scroll to bottom when messages change
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
 
     // called when user sends new message
     // uses api to send users msg to backend & updates msgs state
@@ -73,6 +88,9 @@ const ChatWidget: React.FC = () => {
 
                 <div className="flex-grow overflow-y-auto">
                     <MessageList messages={messages} onEdit={handleEdit} onDelete={handleDelete} />
+
+                    {/* dummy div to mark the end of messages */}
+                    <div ref={messageEndRef}></div>
                 </div>
             
                 <div className="p-4 border-t">
