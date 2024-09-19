@@ -4,6 +4,7 @@ from database import SessionLocal, engine, get_db
 from models import Base, Message
 from fastapi.middleware.cors import CORSMiddleware
 from schemas import MessageCreate, MessageResponse, MessageUpdate
+from transformers import pipeline
 
 """
 Main handles backend API logic for chatbot
@@ -11,6 +12,7 @@ Main handles backend API logic for chatbot
 - initializes FastAPI app & sets up database
 - defines data models to format API responses according to database schema
 - implement get bot response logic
+- use free GPT model from transformers library to generate bot response
 - define API endpoints
 """
 
@@ -28,9 +30,23 @@ app.add_middleware(
 # creates all tables in database defined by ORM models (classes that inherit from Base)
 Base.metadata.create_all(bind=engine)   # recreates tables with updated schema
 
+# load free GPT model
+generator = pipeline('text-generation', model='EleutherAI/gpt-neo-1.3B')
+
 # chatbot logic (currently simple echo bot)
-def get_bot_response(user_message: str) -> str:
-    return f"{user_message}"
+def generate_bot_response(user_message: str) -> str:
+    return user_message
+
+    # Generate a response with truncation and padding enabled
+    # response = generator(
+    #     user_message,
+    #     max_length=20,  # Maximum length of the generated response
+    #     num_return_sequences=1,
+    #     truncation=True,  # Explicitly set truncation to True
+    #     pad_token_id=50256  # Use the end-of-sequence token for padding
+    # )
+    
+    # return response[0]['generated_text']
 
 # API endpoints
 
@@ -43,7 +59,7 @@ def create_message(message: MessageCreate, db: Session = Depends(get_db)):
     - param db is database session
     """
     # get bot response
-    bot_response = get_bot_response(message.user_message)
+    bot_response = generate_bot_response(message.user_message)
 
     # create database entry (Message object) and commit it to session
     db_message = Message(user_message=message.user_message, bot_response=bot_response)
@@ -77,7 +93,7 @@ def update_message(message_id: int, message: MessageUpdate, db: Session = Depend
     
     # update user message and bot response in the record (tracked by SQLAlchemy)
     db_message.user_message = message.user_message
-    db_message.bot_response = get_bot_response(message.user_message)
+    db_message.bot_response = generate_bot_response(message.user_message)
     
     # save the updated record to the database - dont need to re-add bc record is in persistent state
     db.commit()
